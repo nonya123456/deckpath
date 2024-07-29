@@ -52,12 +52,12 @@ func (m *cliManager) Start(cfg game.LevelConfig) {
 }
 
 func (m *cliManager) showHelp() {
-	helpText := `	Available commands:
-	- help        : Show this help message
-	- path        : Display the current path
-	- deck        : Display the current deck
-	- play        : Play cards from the current deck
-	- quit        : Quit game`
+	helpText := `Available commands:
+- help                                      : Show this help message
+- path                                      : Display the current path
+- deck                                      : Display the current deck
+- play <card_index> [card_index ...]        : Play cards from the current deck
+- quit                                      : Quit game`
 	fmt.Println(helpText)
 }
 
