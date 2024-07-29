@@ -62,6 +62,10 @@ func (m *cliManager) showHelp() {
 }
 
 func (m *cliManager) showPath() {
+	turn := m.level.Turn()
+	score := m.level.Score()
+	fmt.Printf("Turn: %d, Score: %d\n", turn, score)
+
 	path := m.level.Path()
 	tiles := make([]string, 0, len(path))
 	for _, tile := range path {

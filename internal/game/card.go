@@ -39,7 +39,7 @@ func (c Card) ToString() string {
 }
 
 func NewCard() Card {
-	effects := []CardEffect{CardEffectMove, CardEffectMove, CardEffectPlant, CardEffectHarvest}
+	effects := []CardEffect{CardEffectMove, CardEffectPlant, CardEffectHarvest}
 	idx := rand.Intn(len(effects))
 	card := Card{
 		Effect: effects[idx],

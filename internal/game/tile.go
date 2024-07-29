@@ -2,6 +2,10 @@ package game
 
 import "strconv"
 
+const (
+	TileMaxGrowth = 4
+)
+
 type Tile struct {
 	Growth int
 }

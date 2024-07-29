@@ -9,8 +9,8 @@ func main() {
 	container := wire.InitializeContainer()
 	cfg := game.LevelConfig{
 		PathLength: 10,
-		DeckSize:   10,
-		Player:     9,
+		DeckSize:   4,
+		Player:     0,
 	}
 	container.Manager.Start(cfg)
 }
