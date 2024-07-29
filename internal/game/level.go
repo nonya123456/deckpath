@@ -45,6 +45,10 @@ func (l *level) Play(cards []int) error {
 }
 
 func (l *level) validateCards(cards []int) error {
+	if len(cards) == 0 {
+		return errors.New("no card provided")
+	}
+
 	for _, card := range cards {
 		if card < 0 || card >= len(l.deck) {
 			return errors.New("card index out of range")

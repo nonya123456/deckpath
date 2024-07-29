@@ -44,6 +44,12 @@ func (t *LevelTestSuite) TestPlayer() {
 }
 
 func (t *LevelTestSuite) TestPlay() {
+	t.Run("no_card", func() {
+		cards := []int{}
+		err := t.underTest.Play(cards)
+		t.Error(err)
+	})
+
 	t.Run("error", func() {
 		cards := []int{11, 23, 3, 4}
 		err := t.underTest.Play(cards)

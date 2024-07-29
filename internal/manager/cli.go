@@ -40,6 +40,7 @@ func (m *cliManager) Start(cfg game.LevelConfig) {
 			err = m.play(args)
 			if err != nil {
 				m.fallbackWithError(err)
+				continue
 			}
 			m.showPath()
 		case prompt.CommandQuit:
