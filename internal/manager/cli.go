@@ -21,6 +21,7 @@ type cliManager struct {
 
 func (m *cliManager) Start(cfg game.LevelConfig) {
 	m.level = game.NewLevel(cfg)
+	m.showHelp()
 
 	for {
 		cmd, args, err := m.promptReader.ReadNext()
