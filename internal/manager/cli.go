@@ -76,11 +76,11 @@ func (m *cliManager) showPath() {
 func (m *cliManager) showDeck() {
 	path := m.level.Deck()
 	cards := make([]string, 0, len(path))
-	for range path {
-		cards = append(cards, "C")
+	for i := range path {
+		cards = append(cards, strconv.Itoa(i)+") C")
 	}
 
-	fmt.Println(strings.Join(cards, " "))
+	fmt.Println(strings.Join(cards, "\n"))
 }
 
 func (m *cliManager) play(args []string) error {
