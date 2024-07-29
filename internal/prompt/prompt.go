@@ -12,8 +12,12 @@ type Command string
 
 const (
 	CommandUnspecified Command = "UNSPECIFIED"
-	CommandMap         Command = "MAP"
+	CommandPath        Command = "PATH"
 )
+
+func (c Command) ToString() string {
+	return string(c)
+}
 
 type Reader interface {
 	ReadNext() (Command, error)
@@ -51,8 +55,8 @@ func toCommand(commandStr string) (Command, error) {
 	commandStr = strings.ToUpper(commandStr)
 
 	switch commandStr {
-	case "MAP":
-		return CommandMap, nil
+	case CommandPath.ToString():
+		return CommandPath, nil
 	default:
 		return CommandUnspecified, errors.New("failed to convert command")
 	}

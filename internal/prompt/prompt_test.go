@@ -20,8 +20,8 @@ func Test_toCommand(t *testing.T) {
 		},
 		{
 			name:    "map",
-			args:    args{commandStr: "mAp"},
-			want:    CommandMap,
+			args:    args{commandStr: "pAth"},
+			want:    CommandPath,
 			wantErr: false,
 		},
 		{
