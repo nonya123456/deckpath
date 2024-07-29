@@ -1,7 +1,9 @@
 package wire
 
-import "github.com/nonya123456/deckpath/internal/prompt"
+import (
+	"github.com/nonya123456/deckpath/internal/manager"
+)
 
 type Container struct {
-	PromptReader prompt.Reader
+	Manager manager.CLIManager
 }

@@ -7,6 +7,7 @@
 package wire
 
 import (
+	"github.com/nonya123456/deckpath/internal/manager"
 	"github.com/nonya123456/deckpath/internal/prompt"
 )
 
@@ -14,8 +15,9 @@ import (
 
 func InitializeContainer() *Container {
 	reader := prompt.ProvideReader()
+	cliManager := manager.ProvideCLIManager(reader)
 	container := &Container{
-		PromptReader: reader,
+		Manager: cliManager,
 	}
 	return container
 }

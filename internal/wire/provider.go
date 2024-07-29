@@ -2,9 +2,11 @@ package wire
 
 import (
 	"github.com/google/wire"
+	"github.com/nonya123456/deckpath/internal/manager"
 	"github.com/nonya123456/deckpath/internal/prompt"
 )
 
 var ProviderSet = wire.NewSet(
 	prompt.ProvideReader,
+	manager.ProvideCLIManager,
 )
