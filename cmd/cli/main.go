@@ -7,6 +7,11 @@ import (
 )
 
 func main() {
-	_ = wire.InitializeContainer()
-	fmt.Println("Hello from cli")
+	container := wire.InitializeContainer()
+	cmd, err := container.PromptReader.ReadCommand()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(cmd)
 }

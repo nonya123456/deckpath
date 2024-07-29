@@ -6,9 +6,16 @@
 
 package wire
 
+import (
+	"github.com/nonya123456/deckpath/internal/prompt"
+)
+
 // Injectors from wire.go:
 
 func InitializeContainer() *Container {
-	container := &Container{}
+	reader := prompt.ProvidePromptReader()
+	container := &Container{
+		PromptReader: reader,
+	}
 	return container
 }

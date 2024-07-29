@@ -6,6 +6,6 @@ package wire
 import "github.com/google/wire"
 
 func InitializeContainer() *Container {
-	wire.Build(wire.Struct(new(Container), "*"))
+	wire.Build(ProviderSet, wire.Struct(new(Container), "*"))
 	return &Container{}
 }
