@@ -36,7 +36,7 @@ func (r *reader) ReadNext() (Command, error) {
 		return CommandUnspecified, err
 	}
 
-	cmd, err := toCommand(commandStr)
+	cmd, err := ToCommand(commandStr)
 	if err != nil {
 		return CommandUnspecified, err
 	}
@@ -50,7 +50,7 @@ func ProvideReader() Reader {
 	return &reader{}
 }
 
-func toCommand(commandStr string) (Command, error) {
+func ToCommand(commandStr string) (Command, error) {
 	commandStr = strings.TrimSpace(commandStr)
 	commandStr = strings.ToUpper(commandStr)
 
