@@ -49,10 +49,18 @@ func (l *level) validateCards(cards []int) error {
 		return errors.New("no card provided")
 	}
 
+	cardSet := make(map[int]struct{})
 	for _, card := range cards {
 		if card < 0 || card >= len(l.deck) {
 			return errors.New("card index out of range")
 		}
+
+		_, ok := cardSet[card]
+		if ok {
+			return errors.New("duplicate card found")
+		}
+
+		cardSet[card] = struct{}{}
 	}
 
 	return nil

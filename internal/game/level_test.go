@@ -56,6 +56,12 @@ func (t *LevelTestSuite) TestPlay() {
 		t.Error(err)
 	})
 
+	t.Run("duplicate", func() {
+		cards := []int{1, 1, 3, 4}
+		err := t.underTest.Play(cards)
+		t.Error(err)
+	})
+
 	t.Run("no_error", func() {
 		cards := []int{1, 2, 3, 4}
 		err := t.underTest.Play(cards)
