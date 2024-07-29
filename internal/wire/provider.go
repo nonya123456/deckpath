@@ -6,5 +6,5 @@ import (
 )
 
 var ProviderSet = wire.NewSet(
-	prompt.ProvidePromptReader,
+	prompt.ProvideReader,
 )

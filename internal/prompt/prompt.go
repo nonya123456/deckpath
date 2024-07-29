@@ -16,13 +16,13 @@ const (
 )
 
 type Reader interface {
-	ReadCommand() (Command, error)
+	ReadNext() (Command, error)
 }
 
 type reader struct {
 }
 
-func (r *reader) ReadCommand() (Command, error) {
+func (r *reader) ReadNext() (Command, error) {
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Print("> ")
@@ -42,7 +42,7 @@ func (r *reader) ReadCommand() (Command, error) {
 
 var _ Reader = (*reader)(nil)
 
-func ProvidePromptReader() Reader {
+func ProvideReader() Reader {
 	return &reader{}
 }
 

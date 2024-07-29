@@ -13,7 +13,7 @@ import (
 // Injectors from wire.go:
 
 func InitializeContainer() *Container {
-	reader := prompt.ProvidePromptReader()
+	reader := prompt.ProvideReader()
 	container := &Container{
 		PromptReader: reader,
 	}
