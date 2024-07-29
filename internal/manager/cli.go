@@ -9,7 +9,7 @@ import (
 )
 
 type CLIManager interface {
-	Start(pathLength int)
+	Start(cfg game.LevelConfig)
 }
 
 type cliManager struct {
@@ -17,8 +17,8 @@ type cliManager struct {
 	level        game.Level
 }
 
-func (m *cliManager) Start(pathLength int) {
-	m.level = game.NewLevel(pathLength)
+func (m *cliManager) Start(cfg game.LevelConfig) {
+	m.level = game.NewLevel(cfg)
 
 	for {
 		cmd, err := m.promptReader.ReadNext()
@@ -32,6 +32,8 @@ func (m *cliManager) Start(pathLength int) {
 			m.handleHelp()
 		case prompt.CommandPath:
 			m.handlePath()
+		case prompt.CommandDeck:
+			m.handleDeck()
 		case prompt.CommandQuit:
 			return
 		default:
@@ -44,8 +46,8 @@ func (m *cliManager) handleHelp() {
 	helpText := `	Available commands:
 	- help        : Show this help message
 	- path        : Display the current path
-	- quit        : Quit game
-	`
+	- deck        : Display the current deck
+	- quit        : Quit game`
 	fmt.Println(helpText)
 }
 
@@ -57,6 +59,16 @@ func (m *cliManager) handlePath() {
 	}
 
 	fmt.Println(strings.Join(tiles, " "))
+}
+
+func (m *cliManager) handleDeck() {
+	path := m.level.Deck()
+	cards := make([]string, 0, len(path))
+	for range path {
+		cards = append(cards, "C")
+	}
+
+	fmt.Println(strings.Join(cards, " "))
 }
 
 func (m *cliManager) fallback() {

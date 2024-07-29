@@ -35,6 +35,13 @@ func Test_ToCommand(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name:    "deck",
+			args:    args{commandStr: "deCk"},
+			want:    prompt.CommandDeck,
+			wantErr: false,
+		},
+
+		{
 			name:    "quit",
 			args:    args{commandStr: "Quit"},
 			want:    prompt.CommandQuit,

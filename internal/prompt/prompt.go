@@ -14,6 +14,7 @@ const (
 	CommandUnspecified Command = "UNSPECIFIED"
 	CommandHelp        Command = "HELP"
 	CommandPath        Command = "PATH"
+	CommandDeck        Command = "DECK"
 	CommandQuit        Command = "QUIT"
 )
 
@@ -61,6 +62,8 @@ func ToCommand(commandStr string) (Command, error) {
 		return CommandHelp, nil
 	case CommandPath.ToString():
 		return CommandPath, nil
+	case CommandDeck.ToString():
+		return CommandDeck, nil
 	case CommandQuit.ToString():
 		return CommandQuit, nil
 	default:
