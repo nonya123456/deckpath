@@ -1,7 +1,5 @@
 package game
 
-type Tile struct{}
-
 type Level interface {
 	Path() []Tile
 }
