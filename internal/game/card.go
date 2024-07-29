@@ -26,9 +26,9 @@ func (c Card) ToString() string {
 	switch c.Effect {
 	case CardEffectMove:
 		if c.Amount > 0 {
-			return fmt.Sprintf("Move Right For %d Tiles", c.Amount)
+			return fmt.Sprintf("Move Right By %d Tiles", c.Amount)
 		}
-		return fmt.Sprintf("Move Left For %d Tiles", -c.Amount)
+		return fmt.Sprintf("Move Left By %d Tiles", -c.Amount)
 	case CardEffectPlant:
 		return "Plant"
 	case CardEffectHarvest:

@@ -19,12 +19,12 @@ func TestCard_ToString(t *testing.T) {
 		{
 			name:   "move_left",
 			fields: fields{Effect: game.CardEffectMove, Amount: -2},
-			want:   "Move Left For 2 Tiles",
+			want:   "Move Left By 2 Tiles",
 		},
 		{
 			name:   "move_right",
 			fields: fields{Effect: game.CardEffectMove, Amount: 1},
-			want:   "Move Right For 1 Tiles",
+			want:   "Move Right By 1 Tiles",
 		},
 		{
 			name:   "plant",
