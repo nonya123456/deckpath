@@ -1,7 +1,9 @@
 package manager
 
 import (
+	"errors"
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/nonya123456/deckpath/internal/game"
@@ -21,37 +23,44 @@ func (m *cliManager) Start(cfg game.LevelConfig) {
 	m.level = game.NewLevel(cfg)
 
 	for {
-		cmd, err := m.promptReader.ReadNext()
+		cmd, args, err := m.promptReader.ReadNext()
 		if err != nil {
-			m.fallback()
+			m.fallbackWithError(err)
 			continue
 		}
 
 		switch cmd {
 		case prompt.CommandHelp:
-			m.handleHelp()
+			m.showHelp()
 		case prompt.CommandPath:
-			m.handlePath()
+			m.showPath()
 		case prompt.CommandDeck:
-			m.handleDeck()
+			m.showDeck()
+		case prompt.CommandPlay:
+			err = m.play(args)
+			if err != nil {
+				m.fallbackWithError(err)
+			}
+			m.showPath()
 		case prompt.CommandQuit:
 			return
 		default:
-			m.fallback()
+			m.fallbackWithError(errors.New("command not found"))
 		}
 	}
 }
 
-func (m *cliManager) handleHelp() {
+func (m *cliManager) showHelp() {
 	helpText := `	Available commands:
 	- help        : Show this help message
 	- path        : Display the current path
 	- deck        : Display the current deck
+	- play        : Play cards from the current deck
 	- quit        : Quit game`
 	fmt.Println(helpText)
 }
 
-func (m *cliManager) handlePath() {
+func (m *cliManager) showPath() {
 	path := m.level.Path()
 	tiles := make([]string, 0, len(path))
 	for range path {
@@ -63,7 +72,7 @@ func (m *cliManager) handlePath() {
 	fmt.Println(strings.Repeat("  ", player) + "^ " + strings.Repeat("  ", len(path)-player-1))
 }
 
-func (m *cliManager) handleDeck() {
+func (m *cliManager) showDeck() {
 	path := m.level.Deck()
 	cards := make([]string, 0, len(path))
 	for range path {
@@ -73,8 +82,22 @@ func (m *cliManager) handleDeck() {
 	fmt.Println(strings.Join(cards, " "))
 }
 
-func (m *cliManager) fallback() {
-	fmt.Println("Error")
+func (m *cliManager) play(args []string) error {
+	cards := make([]int, 0, len(args))
+	for _, arg := range args {
+		card, err := strconv.Atoi(arg)
+		if err != nil {
+			return err
+		}
+
+		cards = append(cards, card)
+	}
+
+	return m.level.Play(cards)
+}
+
+func (m *cliManager) fallbackWithError(e error) {
+	fmt.Println("SKIPPED: " + e.Error())
 }
 
 var _ CLIManager = (*cliManager)(nil)

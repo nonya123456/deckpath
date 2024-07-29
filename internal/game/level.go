@@ -1,5 +1,9 @@
 package game
 
+import (
+	"errors"
+)
+
 type LevelConfig struct {
 	PathLength int
 	DeckSize   int
@@ -10,6 +14,7 @@ type Level interface {
 	Path() []Tile
 	Deck() []Card
 	Player() int
+	Play(cards []int) error
 }
 
 type level struct {
@@ -28,6 +33,25 @@ func (l *level) Deck() []Card {
 
 func (l *level) Player() int {
 	return l.player
+}
+
+func (l *level) Play(cards []int) error {
+	err := l.validateCards(cards)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (l *level) validateCards(cards []int) error {
+	for _, card := range cards {
+		if card < 0 || card >= len(l.deck) {
+			return errors.New("card index out of range")
+		}
+	}
+
+	return nil
 }
 
 var _ Level = (*level)(nil)
