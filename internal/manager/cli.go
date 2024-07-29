@@ -57,8 +57,10 @@ func (m *cliManager) handlePath() {
 	for range path {
 		tiles = append(tiles, "O")
 	}
-
 	fmt.Println(strings.Join(tiles, " "))
+
+	player := m.level.Player()
+	fmt.Println(strings.Repeat("  ", player) + "^ " + strings.Repeat("  ", len(path)-player-1))
 }
 
 func (m *cliManager) handleDeck() {

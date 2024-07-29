@@ -18,7 +18,11 @@ func TestLevelTestSuite(t *testing.T) {
 }
 
 func (t *LevelTestSuite) SetupTest() {
-	t.cfg = game.LevelConfig{PathLength: 10, DeckSize: 5}
+	t.cfg = game.LevelConfig{
+		PathLength: 10,
+		DeckSize:   5,
+		Player:     1,
+	}
 	t.underTest = game.NewLevel(t.cfg)
 }
 
@@ -32,4 +36,9 @@ func (t *LevelTestSuite) TestDeck() {
 	expected := make([]game.Card, t.cfg.DeckSize)
 	actual := t.underTest.Deck()
 	t.Equal(expected, actual)
+}
+
+func (t *LevelTestSuite) TestPlayer() {
+	player := t.underTest.Player()
+	t.Equal(t.cfg.Player, player)
 }
