@@ -28,12 +28,25 @@ func (m *cliManager) Start(pathLength int) {
 		}
 
 		switch cmd {
+		case prompt.CommandHelp:
+			m.handleHelp()
 		case prompt.CommandPath:
 			m.handlePath()
+		case prompt.CommandQuit:
+			return
 		default:
 			m.fallback()
 		}
 	}
+}
+
+func (m *cliManager) handleHelp() {
+	helpText := `	Available commands:
+	- help        : Show this help message
+	- path        : Display the current path
+	- quit        : Quit game
+	`
+	fmt.Println(helpText)
 }
 
 func (m *cliManager) handlePath() {

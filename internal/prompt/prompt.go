@@ -12,7 +12,9 @@ type Command string
 
 const (
 	CommandUnspecified Command = "UNSPECIFIED"
+	CommandHelp        Command = "HELP"
 	CommandPath        Command = "PATH"
+	CommandQuit        Command = "QUIT"
 )
 
 func (c Command) ToString() string {
@@ -55,8 +57,12 @@ func ToCommand(commandStr string) (Command, error) {
 	commandStr = strings.ToUpper(commandStr)
 
 	switch commandStr {
+	case CommandHelp.ToString():
+		return CommandHelp, nil
 	case CommandPath.ToString():
 		return CommandPath, nil
+	case CommandQuit.ToString():
+		return CommandQuit, nil
 	default:
 		return CommandUnspecified, errors.New("failed to convert command")
 	}

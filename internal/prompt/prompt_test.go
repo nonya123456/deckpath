@@ -23,11 +23,24 @@ func Test_ToCommand(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name:    "map",
+			name:    "help",
+			args:    args{commandStr: "help"},
+			want:    prompt.CommandHelp,
+			wantErr: false,
+		},
+		{
+			name:    "path",
 			args:    args{commandStr: "pAth"},
 			want:    prompt.CommandPath,
 			wantErr: false,
 		},
+		{
+			name:    "quit",
+			args:    args{commandStr: "Quit"},
+			want:    prompt.CommandQuit,
+			wantErr: false,
+		},
+
 		{
 			name:    "unspecified",
 			args:    args{commandStr: "some command"},
