@@ -15,6 +15,6 @@ func (l *level) Path() []Tile {
 var _ Level = (*level)(nil)
 
 func NewLevel(pathLength int) Level {
-	path := make([]Tile, pathLength)
+	path := NewPath(pathLength)
 	return &level{path: path}
 }
