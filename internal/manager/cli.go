@@ -64,8 +64,8 @@ func (m *cliManager) showHelp() {
 func (m *cliManager) showPath() {
 	path := m.level.Path()
 	tiles := make([]string, 0, len(path))
-	for range path {
-		tiles = append(tiles, "O")
+	for _, tile := range path {
+		tiles = append(tiles, tile.ToString())
 	}
 	fmt.Println(strings.Join(tiles, " "))
 
@@ -74,10 +74,10 @@ func (m *cliManager) showPath() {
 }
 
 func (m *cliManager) showDeck() {
-	path := m.level.Deck()
-	cards := make([]string, 0, len(path))
-	for i := range path {
-		cards = append(cards, strconv.Itoa(i)+") C")
+	deck := m.level.Deck()
+	cards := make([]string, 0, len(deck))
+	for i, card := range deck {
+		cards = append(cards, fmt.Sprintf("%d) %s", i, card.ToString()))
 	}
 
 	fmt.Println(strings.Join(cards, "\n"))
